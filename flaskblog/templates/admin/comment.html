@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.0.js">
+    </script>
+    <title> Dashboard </title>
+</head>
+
+<body>
+
+    <h2 class="text-center">User Dashboard </h2>
+    {% include 'admin/messages.html' %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{{url_for('admin')}}">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{url_for('admin')}}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('addpost')}}">Add post</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('logout')}}" aria-disabled="true">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <table class="table table-striped table-bordered table-sm">
+        <thead class="bg-dark text-white">
+            <th>Sr</th>
+            <th>Name</th>
+            <th>Comments</th>
+            <th>Post ID</th>
+            <th>Date</th>
+            <th>Status</th>
+            <td>Delete</td>
+
+
+        </thead>
+        <tbody>
+            {% for comment in comments %}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{comment.name}}</td>
+                <td>{{comment.message | truncate(100, True)}}</td>
+                <td>{{comment.post.id}}</td>
+                <!-- <td>{{comment.feature}}</td> -->
+                <td>{{comment.date_pub.strftime('%Y %B %d')}}
+               
+                </td>
+                {% if comment.feature == False %}
+                <td>
+                    <a href="{{ url_for('check', id=comment.id) }}" class="text-center text-danger"> Pandding </a>
+                </td>
+                {% else %}
+                <td>
+                    <a href="{{ url_for('delcomment', id=comment.id) }}" class="text-success"> Aproved </a>
+                </td>
+                {% endif %}
+                <td>
+                    <a href="{{ url_for('check', id=comment.id) }}" class="btn btn-sm btn-danger"> Delete </a>
+                </td>
+            </tr>
+            <!-- Button to Open the Modal -->
+            {% endfor %}
+        </tbody>
+    </table>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+    </script>
+</body>
+
+</html>

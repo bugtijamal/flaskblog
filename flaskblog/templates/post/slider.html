@@ -1,0 +1,40 @@
+ <section class="home_banner_area">
+        <div class="banner_inner d-flex align-items-center bg-light">
+            <div class="container">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators" style="position:absolute; bottom:0%;">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        
+                        {% for post in posts %}
+            
+                        {% if loop.index == 1 %}
+                        <div class="carousel-item active">
+                            {% else %}
+                        <div class="carousel-item">
+                                {% endif %}
+                              
+                            <div class="background_image banner_inner" style="background-image:url('{{url_for('static', filename='images/'+ post.image)}}');">
+                                <div class="banner_content text-center" style="position:absolute; right:25%; top: 50%;">
+                                        <div class="date">
+                                            <a href="#">Gadgets</a>
+                                            <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>{{post.date_pub.strftime('%B %Y %d')}}</a>
+                                            <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i>05</a>
+                                        </div>
+                                        <h4><a href="{{url_for('news', slug=post.slug)}}"  class="text-white" style="text-shadow:5px 5px 10px black;">{{post.title}}</a> </h4>
+                                        <p style="text-shadow:5px 5px 10px black;">{{post.body| truncate(150, True)}}</p>
+                                    </div>
+                            </div>
+                           
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>  
+

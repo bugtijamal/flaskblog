@@ -1,0 +1,87 @@
+{% extends 'post/base.html' %}
+{% block content %}
+
+<section class="news_area single-post-area p_100">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8">
+				<div class="main_blog_details">
+					<div class="latest_news">
+						{% for post in posts %}
+						<div class="media">
+							<div class="d-flex">
+								<img class="img-fluid" src="{{url_for('static',filename='images/' + post.image)}}"
+									style="width:200px; height:200px;">
+							</div>
+							<div class="media-body">
+								<div class="choice_text">
+									<div class="date">
+										<a class="" href="#">{{post.author.name}}</a>
+										<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>March 14, 2018</a>
+										<a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> Views
+											{{post.views }} | {{post.comments}} Comennts</a>
+									</div>
+									<a href="{{url_for('news', slug=post.slug)}}">
+										<h4>{{post.title}}</h4>
+									</a>
+									<p>{{post.body |truncate(200, True) }}</p>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="right_sidebar">
+
+					<aside class="r_widgets add_widgets text-center">
+						<img class="img-fluid" src="img/blog/add-1.jpg" alt="">
+					</aside>
+					<aside class="r_widgets social_widgets">
+						<div class="main_title2">
+							<h2>Social Networks</h2>
+						</div>
+						<ul class="list">
+							<li><a href="#"><i class="fa fa-facebook"></i> 983Likes <span>Like our page</span></a>
+							</li>
+							<li><a href="#"><i class="fa fa-twitter"></i> 983Followers <span>Follow Us</span></a>
+							</li>
+							<li><a href="#"><i class="fa fa-youtube-play"></i> 9835Subscriber
+									<span>Subscribe</span></a></li>
+							<li><a href="#"><i class="fa fa-vimeo"></i> 59874Subscriber <span>Subscribe</span></a>
+							</li>
+							<li><a href="#"><i class="fa fa-pinterest"></i> 36958Followers <span>Follow
+										Us</span></a></li>
+							<li><a href="#"><i class="fa fa-rss"></i>RSS Subscribe <span>Subscribe</span></a></li>
+						</ul>
+					</aside>
+					<aside class="r_widgets newsleter_widgets">
+						<div class="main_title2">
+							<h2>Newsletter</h2>
+						</div>
+						<div class="nsl_inner">
+							<i class="fa fa-envelope"></i>
+							<h4>Subscribe to our Newsletter</h4>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+								incididunt ut labore et dolore magna aliqua adipisicing</p>
+							<div class="form-group d-flex flex-row">
+								<div class="input-group">
+									<input type="text" class="form-control" id="inlineFormInputGroup"
+										placeholder="Enter your email address" onfocus="this.placeholder = ''"
+										onblur="this.placeholder = 'Enter email'">
+								</div>
+								<a href="#" class="bbtns">Subcribe</a>
+							</div>
+						</div>
+					</aside>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--================End News Area =================-->
+
+<!--================ start footer Area  =================-->
+{% endblock content %}
