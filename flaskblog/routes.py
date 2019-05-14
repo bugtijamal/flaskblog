@@ -19,16 +19,18 @@ def save_photo(photo):
 @app.route('/')
 def index():
     posts = Post.query.order_by(Post.id.desc()).all()
-    return render_template('post/index.html', posts=posts)
+    popularpost = Post.query.order_by(Post.views.desc()).limit(3)
+    return render_template('post/index.html', posts=posts, popularpost=popularpost)
 
 
 @app.route('/news/<string:slug>', methods=['POST','GET'])
 def news(slug):
     post = Post.query.filter_by(slug=slug).first()
+    popularpost = Post.query.order_by(Post.views.desc()).limit(3)
     comment = Comments.query.filter_by(post_id=post.id).filter_by(feature=True).all()
     post.views = post.views + 1
     db.session.commit()
-    Thanks =""
+    
     if request.method =="POST":
         post_id = post.id
         name = request.form.get('name')
@@ -41,7 +43,7 @@ def news(slug):
         flash('Your comment has been submited  submitted will be published after aproval of admin', 'success')
         return redirect(request.url)
 
-    return render_template('post/news-details.html', post=post, comment=comment, Thanks=Thanks)
+    return render_template('post/news-details.html', post=post, comment=comment, popularpost=popularpost)
 
 
 @app.route('/search')

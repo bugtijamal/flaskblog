@@ -24,9 +24,10 @@
     							<div class="choice_text">
     								<div class="date">
     									<a class="" href="#">{{post.author.name}}</a>
-    									<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>March 14, 2018</a>
-    									<a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> Views
-    										{{post.views }} | {{post.comments}} Comennts</a>
+    									<a href="#"><i class="fa fa-calendar"
+    											aria-hidden="true"></i>{{post.date_pub.strftime('%B %d, %Y')}}</a>
+    									<a href="#"><i class="fa fa-eye" aria-hidden="true"> {{post.views }}</i>
+    										| <li class="fa fa-comments"> {{post.comments}}</li></a>
     								</div>
     								<a href="{{url_for('news', slug=post.slug)}}">
     									<h4>{{post.title}}</h4>
@@ -52,14 +53,15 @@
     											src="{{url_for('static',filename='images/' + post.image)}}" alt=""
     											style="height:200px;">
     										<div class="choice_text">
-    											<a href="news-details.html">
+    											<a href="{{url_for('news', slug=post.slug)}}">
     												<h4>{{post.title}}</h4>
     											</a>
     											<div class="date">
-    												<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>March
-    													14, 2018</a>
-    												<a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i>Views
-    													{{post.views }} | {{post.comments}} Comments</a>
+    												<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>{{post.date_pub.strftime('%B %d, %Y')}}</a>
+    												<a href="#"><i class="fa fa-eye" aria-hidden="true">
+    														{{post.views }}</i>
+    													|<i class="fa fa-comments" aria-hidden="true">
+    														{{post.comments}}</i> </a>
     											</div>
     										</div>
     									</div>
@@ -75,26 +77,28 @@
     					<aside class="r_widgets news_widgets">
     						<div class="main_title2">
     							<h2>Most Popular News</h2>
-							</div>
-							{% for post in posts [2:5] %}
+    						</div>
+    						{% for popular in popularpost  %}
     						<div class="choice_item">
-					
-    							<img class="img-fluid" src="{{url_for('static',filename='images/' + post.image)}}" style="width:100px;">
+    							<img class="img-fluid" src="{{url_for('static',filename='images/' + popular.image)}}"
+    								style="width:100px;">
     							<div class="choice_text">
     								<div class="date">
     									<a href="#"></a>
-    									<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>March 14, 2018</a>
-    									<a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i>05</a>
+    									<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>{{popular.date_pub.strftime('%B %d, %Y')}}</a>
+    									<a href="#"></i> <i class="fa fa-eye" aria-hidden="true">
+    											{{popular.views}}</i></a>
+    									<a href="#"></i> <i class="fa fa-comments" aria-hidden="true">
+    											{{popular.comments}}</i></a>
     								</div>
-    								<a href="news-details.html">
-    									<h4>{{post.title}}</h4>
+    								<a href="{{url_for('news', slug=popular.slug)}}">
+    									<h4>{{popular.title}}</h4>
     								</a>
-    								<p> {{ post.body|truncate(50, True)}} </p> 
-								</div>
-								
-							</div>
-							{% endfor %}
-							
+    								<p> {{ popular.body|truncate(50, True)}} </p>
+    							</div>
+    						</div>
+    						{% endfor %}
+
     					</aside>
     					<aside class="r_widgets add_widgets text-center">
     						<img class="img-fluid" src="img/blog/add-1.jpg" alt="">
@@ -104,38 +108,21 @@
     							<h2>Social Networks</h2>
     						</div>
     						<ul class="list">
-    							<li><a href="#"><i class="fa fa-facebook"></i> 983Likes <span>Like our page</span></a>
+    							<li><a href="#"><i class="fab fa-facebook"></i> 983Likes <span>Like our page</span></a>
     							</li>
-    							<li><a href="#"><i class="fa fa-twitter"></i> 983Followers <span>Follow Us</span></a>
+    							<li><a href="#"><i class="fab fa-twitter"></i> 983Followers <span>Follow Us</span></a>
     							</li>
-    							<li><a href="#"><i class="fa fa-youtube-play"></i> 9835Subscriber
+    							<li><a href="#"><i class="fab fa-youtube-play"></i> 9835Subscriber
     									<span>Subscribe</span></a></li>
-    							<li><a href="#"><i class="fa fa-vimeo"></i> 59874Subscriber <span>Subscribe</span></a>
+    							<li><a href="#"><i class="fab fa-vimeo"></i> 59874Subscriber <span>Subscribe</span></a>
     							</li>
-    							<li><a href="#"><i class="fa fa-pinterest"></i> 36958Followers <span>Follow
+    							<li><a href="#"><i class="fab fa-pinterest"></i> 36958Followers <span>Follow
     										Us</span></a></li>
     							<li><a href="#"><i class="fa fa-rss"></i>RSS Subscribe <span>Subscribe</span></a></li>
     						</ul>
     					</aside>
-    					<aside class="r_widgets newsleter_widgets">
-    						<div class="main_title2">
-    							<h2>Newsletter</h2>
-    						</div>
-    						<div class="nsl_inner">
-    							<i class="fa fa-envelope"></i>
-    							<h4>Subscribe to our Newsletter</h4>
-    							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-    								incididunt ut labore et dolore magna aliqua adipisicing</p>
-    							<div class="form-group d-flex flex-row">
-    								<div class="input-group">
-    									<input type="text" class="form-control" id="inlineFormInputGroup"
-    										placeholder="Enter your email address" onfocus="this.placeholder = ''"
-    										onblur="this.placeholder = 'Enter email'">
-    								</div>
-    								<a href="#" class="bbtns">Subcribe</a>
-    							</div>
-    						</div>
-    					</aside>
+
+
     				</div>
     			</div>
     		</div>
@@ -152,70 +139,28 @@
     					<h2>Best Product Deals</h2>
     				</div>
     				<div class="product_list">
+    					{% for popular in popularpost  %}
     					<div class="media">
     						<div class="d-flex">
-    							<img src="img/product/product-1.jpg" alt="">
+    							<img src="{{url_for('static',filename='images/' + popular.image)}}" style="width: 100px;height: 100px;" alt="">
     						</div>
     						<div class="media-body">
     							<div class="choice_text">
-    								<a href="#">
-    									<h4>Video Games Playing With Imagination That surprise you</h4>
+    								<a href="{{url_for('news', slug=popular.slug)}}">
+    									<h4>{{popular.title}}</h4>
     								</a>
-    								<div class="date">
-    									<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>March 14, 2018</a>
-    									<a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i>05</a>
-    								</div>
+									<div class="date">
+											<a href="#"></a>
+											<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>{{popular.date_pub.strftime('%B %d, %Y')}}</a>
+											<a href="#"></i> <i class="fa fa-eye" aria-hidden="true">
+													{{popular.views}}</i></a>
+											<a href="#"></i> <i class="fa fa-comments" aria-hidden="true">
+													{{popular.comments}}</i></a>
+										</div>
     							</div>
     						</div>
     					</div>
-    					<div class="media">
-    						<div class="d-flex">
-    							<img src="img/product/product-2.jpg" alt="">
-    						</div>
-    						<div class="media-body">
-    							<div class="choice_text">
-    								<a href="#">
-    									<h4>A Discount Toner Cartridge Is Better Than Ever And You Will Save</h4>
-    								</a>
-    								<div class="date">
-    									<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>March 14, 2018</a>
-    									<a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i>05</a>
-    								</div>
-    							</div>
-    						</div>
-    					</div>
-    					<div class="media">
-    						<div class="d-flex">
-    							<img src="img/product/product-3.jpg" alt="">
-    						</div>
-    						<div class="media-body">
-    							<div class="choice_text">
-    								<a href="#">
-    									<h4>Microsoft Patch Management For Home Users</h4>
-    								</a>
-    								<div class="date">
-    									<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>March 14, 2018</a>
-    									<a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i>05</a>
-    								</div>
-    							</div>
-    						</div>
-    					</div>
-    					<div class="media">
-    						<div class="d-flex">
-    							<img src="img/product/product-4.jpg" alt="">
-    						</div>
-    						<div class="media-body">
-    							<div class="choice_text">
-    								<a href="#">
-    									<h4>Asus Laptops Are Still Part Of The Dell Family</h4>
-    								</a>
-    								<div class="date">
-    									<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>March 14, 2018</a>
-    									<a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i>05</a>
-    								</div>
-    							</div>
-    						</div>
-    					</div>
+    					{% endfor %}
     				</div>
     			</div>
     			<div class="col-lg-4">
@@ -342,7 +287,7 @@
     							</div>
     						</div>
     					</div>
-    					<div class="media">
+								<div class="media">
     						<div class="d-flex">
     							<img src="img/product/product-12.jpg" alt="">
     						</div>

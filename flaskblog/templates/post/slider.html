@@ -22,8 +22,10 @@
                                 <div class="banner_content text-center" style="position:absolute; right:25%; top: 50%;">
                                         <div class="date">
                                             <a href="#">Gadgets</a>
-                                            <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>{{post.date_pub.strftime('%B %Y %d')}}</a>
-                                            <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i>05</a>
+                                            <a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>{{post.date_pub.strftime('%B %Y %d')}} </a>
+            
+                                            <a href="#"><i class="fa fa-eye" aria-hidden="true"> {{post.views}}</i></a>
+                                            <a href="#"><i class="fa fa-comments" aria-hidden="true"> {{post.comments}}</i></a>
                                         </div>
                                         <h4><a href="{{url_for('news', slug=post.slug)}}"  class="text-white" style="text-shadow:5px 5px 10px black;">{{post.title}}</a> </h4>
                                         <p style="text-shadow:5px 5px 10px black;">{{post.body| truncate(150, True)}}</p>

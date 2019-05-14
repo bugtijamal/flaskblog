@@ -17,8 +17,9 @@
        							<div class="float-right">
        								<div class="media">
        									<div class="media-body">
-       										<h5>Mark wiens</h5>
-       										<p>12 Dec, 2017 11:21 am</p>
+       										<h5>{{post.author.name}}</h5>
+       										<p> {{post.date_pub.strftime('%d %B, %Y  %I:%m %p')}}
+											</p>
        									</div>	
        								</div>
        							</div>
@@ -91,8 +92,9 @@
         					<aside class="r_widgets news_widgets">
         						<div class="main_title2">
         							<h2>Most Popular News</h2>
-        						</div>
-        						<div class="choice_item">
+								</div>
+								
+        						<!-- <div class="choice_item">
 									<img class="img-fluid" src="img/blog/popular-post/pp-1.jpg" alt="">
 									<div class="choice_text">
 										<div class="date">
@@ -103,80 +105,29 @@
 										<a href="#"><h4>Dealing With Technical Support with 10 Useful Tips</h4></a>
 										<p>It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights</p>
 									</div>
-								</div>
+								</div> -->
+
        							<div class="news_slider owl-carousel">
-       								<div class="item">
-       									<div class="choice_item">
-											<img src="img/blog/popular-post/pp-2.jpg" alt="">
+										{% for popular in popularpost  %}
+										<div class="choice_item">
+											<img class="img-fluid" src="{{url_for('static',filename='images/' + popular.image)}}"
+												style="width:100px;">
 											<div class="choice_text">
-												<a href="#"><h4>Dealing With Technical Support 10 with Useful Tips around</h4></a>
 												<div class="date">
-													<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>March 14, 2018</a>
-													<a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i>05</a>
+													<a href="#"></a>
+													<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>{{popular.date_pub.strftime('%B %d, %Y')}}</a>
+													<a href="#"></i> <i class="fa fa-eye" aria-hidden="true">
+															{{popular.views}}</i></a>
+													<a href="#"></i> <i class="fa fa-comments" aria-hidden="true">
+															{{popular.comments}}</i></a>
 												</div>
+												<a href="{{url_for('news', slug=popular.slug)}}">
+													<h4>{{popular.title}}</h4>
+												</a>
+												<p> {{ popular.body|truncate(50, True)}} </p>
 											</div>
 										</div>
-       								</div>
-       								<div class="item">
-       									<div class="choice_item">
-											<img src="img/blog/popular-post/pp-3.jpg" alt="">
-											<div class="choice_text">
-												<a href="#"><h4>An Ugly Myspace Profile Will Sure Ruin Your Reputation</h4></a>
-												<div class="date">
-													<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>March 14, 2018</a>
-													<a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i>05</a>
-												</div>
-											</div>
-										</div>
-       								</div>
-       								<div class="item">
-       									<div class="choice_item">
-											<img src="img/blog/popular-post/pp-2.jpg" alt="">
-											<div class="choice_text">
-												<a href="#"><h4>Dealing With Technical Support 10 with Useful Tips around</h4></a>
-												<div class="date">
-													<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>March 14, 2018</a>
-													<a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i>05</a>
-												</div>
-											</div>
-										</div>
-       								</div>
-       								<div class="item">
-       									<div class="choice_item">
-											<img src="img/blog/popular-post/pp-3.jpg" alt="">
-											<div class="choice_text">
-												<a href="#"><h4>An Ugly Myspace Profile Will Sure Ruin Your Reputation</h4></a>
-												<div class="date">
-													<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>March 14, 2018</a>
-													<a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i>05</a>
-												</div>
-											</div>
-										</div>
-       								</div>
-       								<div class="item">
-       									<div class="choice_item">
-											<img src="img/blog/popular-post/pp-2.jpg" alt="">
-											<div class="choice_text">
-												<a href="#"><h4>Dealing With Technical Support 10 with Useful Tips around</h4></a>
-												<div class="date">
-													<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>March 14, 2018</a>
-													<a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i>05</a>
-												</div>
-											</div>
-										</div>
-       								</div>
-       								<div class="item">
-       									<div class="choice_item">
-											<img src="img/blog/popular-post/pp-3.jpg" alt="">
-											<div class="choice_text">
-												<a href="#"><h4>An Ugly Myspace Profile Will Sure Ruin Your Reputation</h4></a>
-												<div class="date">
-													<a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>March 14, 2018</a>
-													<a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i>05</a>
-												</div>
-											</div>
-										</div>
-       								</div>
+										{% endfor %}
        							</div>
         					</aside>
         					<aside class="r_widgets add_widgets text-center">
@@ -187,11 +138,11 @@
         							<h2>Social Networks</h2>
         						</div>
         						<ul class="list">
-        							<li><a href="#"><i class="fa fa-facebook"></i> 983Likes <span>Like our page</span></a></li>
-        							<li><a href="#"><i class="fa fa-twitter"></i> 983Followers <span>Follow Us</span></a></li>
-        							<li><a href="#"><i class="fa fa-youtube-play"></i> 9835Subscriber <span>Subscribe</span></a></li>
-        							<li><a href="#"><i class="fa fa-vimeo"></i> 59874Subscriber <span>Subscribe</span></a></li>
-        							<li><a href="#"><i class="fa fa-pinterest"></i> 36958Followers <span>Follow Us</span></a></li>
+        							<li><a href="#"><i class="fab fa-facebook"></i> 983Likes <span>Like our page</span></a></li>
+        							<li><a href="#"><i class="fab fa-twitter"></i> 983Followers <span>Follow Us</span></a></li>
+        							<li><a href="#"><i class="fab fa-youtube-play"></i> 9835Subscriber <span>Subscribe</span></a></li>
+        							<li><a href="#"><i class="fab fa-vimeo"></i> 59874Subscriber <span>Subscribe</span></a></li>
+        							<li><a href="#"><i class="fab fa-pinterest"></i> 36958Followers <span>Follow Us</span></a></li>
         							<li><a href="#"><i class="fa fa-rss"></i>RSS Subscribe <span>Subscribe</span></a></li>
         						</ul>
         					</aside>

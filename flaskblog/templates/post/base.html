@@ -9,7 +9,10 @@
     <title>Force Magazine</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+
+    <!-- <link rel="stylesheet" href="{{url_for('static', filename='css/font-awesome.min.css')}}"> -->
 
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/responsive.css')}}">
@@ -26,10 +29,10 @@
                 </div>
                 <div class="float-right">
                     <ul class="list header_social">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                        <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                        <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
+                        <li><a href="#"><i class="fab fa-behance"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -72,7 +75,7 @@
                                 <form action="{{ url_for('search')}}" method="GET" class="input-group mr-2">
                                     <input type="text" class="form-control" name="q">
                                     <div class="input-group-append">
-                                        <input type="submit" class="btn btn-outline-info" value="Search">
+                                        <input type="submit" class="btn btn-outline-dark" value="Search">
                                     </div>
                                 </form>
                                 <!-- <li class="nav-item"><a href="#" class="search" value="Search"><i class="lnr lnr-magnifier"></i></a></li> -->
